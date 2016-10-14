@@ -3,3 +3,16 @@ body {
     font-size: 18px;
     line-height: 30px;
 }
+section {
+	display: block;
+    clear: both;
+    width: 100%;
+    background-color: lavender;
+}
+.character {
+	float: left;
+    margin: 10px;
+    width: 150px;
+    height: 200px;
+    border: 1px solid black;
+}
