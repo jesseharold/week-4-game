@@ -7,12 +7,13 @@ function Character(healthPoints, attackPower, counterAttackPower){
 	this.enemy;
 
 	this.attack = function(){
+		var power = this.ap;
 		if (!this.enemy) {
-			return this.ap;
-			this.ap += baseAp;
+			this.ap += this.baseAp;
 		} else {
-			return this.cap;
+			power = this.cap;
 		}
+		return power;
 	}
 
 	this.takeDamage = function(damage){
@@ -25,6 +26,8 @@ function Character(healthPoints, attackPower, counterAttackPower){
 var characters = [];
 var hero;
 var opponent;
+var waitingForClick = true;
+var enemiesDefeated = 0;
 
 // game initialize
 function gameInit(){
@@ -32,10 +35,11 @@ function gameInit(){
 	$(".charContainer .character").each(function(){
 		characters.push(new Character($(this).data("hp"),$(this).data("ap"),$(this).data("cap")));
 	});
-	console.log(characters);
+	//console.log(characters);
 	$(".character").on("click", function(){
 		// make this char the hero
-		var hero = $(this).data("char");
+		hero = $(this).data("char");
+		console.log(hero + " is the hero");
 		// reassign click events on others
 		$(".character").off("click").on("click", function(){
 			setOpponent($(this).data("char"));
@@ -49,12 +53,53 @@ function gameInit(){
 				characters[i].enemy = false;
 			}
 		}
-	})
+	});
+	$("#attack").on("click", doFight);
 }
 
 function setOpponent(charId){
-	opponent = charId;
-	$("#enemies .character[data-char=charId]").detach().appendTo("#opponent .charContainer").off("click");
+	if (waitingForClick){
+		opponent = charId;
+		// stops player from clicking on more than one opponent
+		waitingForClick = false;
+		console.log("opponent is " + opponent);
+		$("#enemies .character[data-char='" + charId + "']").detach().appendTo("#opponent .charContainer").off("click");
+	}
 }
 
+function doFight(){
+	if(opponent === false){
+		console.log("you must choose a hero and an opponent.");
+	} else {
+		console.log(hero + " and " + opponent + " fight!");
+		characters[hero].takeDamage(characters[opponent].attack());
+		characters[opponent].takeDamage(characters[hero].attack());
+		$("#hero .character .stats").html("HP: " + characters[hero].hp);
+		$("#opponent .character .stats").html("HP: " + characters[opponent].hp);
+		if(characters[hero].hp < 0 && characters[opponent].hp < 0){
+			fightOver("tie");
+		} else {
+			if (characters[opponent].hp < 0){
+				fightOver(hero);
+			} 
+			if (characters[hero].hp < 0){
+				fightOver(opponent);
+			}
+		}
+	}
+}
+function fightOver(winner){
+	console.log(winner + " wins!");
+	waitingForClick = true;
+	opponent = false;
+	enemiesDefeated++;
+	if (enemiesDefeated === characters.length){
+		gameOver("win!");
+	}
+	//$("#opponent .charContainer").empty();
+}
+
+function gameOver(result){
+	console.log("gameOver " + result);
+}
 $("document").ready(gameInit);
