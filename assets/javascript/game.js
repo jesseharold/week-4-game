@@ -39,7 +39,7 @@ function gameInit(){
 	$(".character").on("click", function(){
 		// make this char the hero
 		hero = $(this).data("char");
-		console.log(hero + " is the hero");
+		//console.log(hero + " is the hero");
 		// reassign click events on others
 		$(".character").off("click").on("click", function(){
 			setOpponent($(this).data("char"));
@@ -63,7 +63,7 @@ function setOpponent(charId){
 		opponent = charId;
 		// stops player from clicking on more than one opponent
 		waitingForClick = false;
-		console.log("opponent is " + opponent);
+		//console.log("opponent is " + opponent);
 		$("#enemies .character[data-char='" + charId + "']").detach().appendTo("#opponent .charContainer").off("click");
 	}
 }
@@ -72,7 +72,7 @@ function doFight(){
 	if(opponent === false){
 		console.log("you must choose a hero and an opponent.");
 	} else {
-		console.log(hero + " and " + opponent + " fight!");
+		//console.log(hero + " and " + opponent + " fight!");
 		characters[hero].takeDamage(characters[opponent].attack());
 		characters[opponent].takeDamage(characters[hero].attack());
 		showStats();

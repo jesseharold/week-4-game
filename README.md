@@ -1,8 +1,15 @@
 # week-4-game
-Star Wars RPG game written with CSS, JavaScript, and jQuery
+Game of Thrones RPG game written with CSS, JavaScript, and jQuery
 
-Instructions:
+To do: 
+     - style and theme
+     - add character images
+     - add battle sounds
+     - html notifications for win/lose
+     - tweak characters' stats so that anyone can win
+     - add more characters
 
+Instructions (all done):
 
     Watch the demo: https://uclax.bootcampcontent.com/UCLA-Coding-Boot-Camp/09-16-Class-Content/blob/master/0919-MW/04-jquery-rpg/2-Homework/Instructions/homework_demos/starwars_demo.mp4
 
