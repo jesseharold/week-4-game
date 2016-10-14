@@ -50,10 +50,11 @@ function gameInit(){
 				$(this).detach().appendTo("#hero .charContainer").off("click");
 
 			} else {
-				characters[i].enemy = false;
+				characters[i].enemy = true;
 			}
 		}
 	});
+	showStats();
 	$("#attack").on("click", doFight);
 }
 
@@ -74,32 +75,52 @@ function doFight(){
 		console.log(hero + " and " + opponent + " fight!");
 		characters[hero].takeDamage(characters[opponent].attack());
 		characters[opponent].takeDamage(characters[hero].attack());
-		$("#hero .character .stats").html("HP: " + characters[hero].hp);
-		$("#opponent .character .stats").html("HP: " + characters[opponent].hp);
-		if(characters[hero].hp < 0 && characters[opponent].hp < 0){
+		showStats();
+		if(characters[hero].hp <= 0 && characters[opponent].hp <= 0){
 			fightOver("tie");
 		} else {
-			if (characters[opponent].hp < 0){
+			if (characters[opponent].hp <= 0){
 				fightOver(hero);
 			} 
-			if (characters[hero].hp < 0){
+			if (characters[hero].hp <= 0){
 				fightOver(opponent);
 			}
 		}
 	}
 }
+function showStats(){
+	for (var i = 0; i < characters.length; i++) {
+		var statsHtml = "<div class='stat'>HP: " + characters[i].hp + "</div>";
+		statsHtml += "<div class='stat'>AP: " + characters[i].ap + "</div>";
+		statsHtml += "<div class='stat'>CAP: " + characters[i].cap + "</div>";
+		$(".character[data-char='" + i + "'] .stats").html(statsHtml);
+	}
+}
 function fightOver(winner){
 	console.log(winner + " wins!");
-	waitingForClick = true;
-	opponent = false;
-	enemiesDefeated++;
+	if (winner === "tie") {
+		console.log("You and "+opponent+" killed each other at the same time");
+		enemiesDefeated++;
+	} else if (winner === hero) {
+		console.log("You killed "+ opponent);
+		enemiesDefeated++;
+	} else if (winner === opponent) {
+		console.log(opponent + " killed you.");
+		gameOver("lose.");
+	}
 	if (enemiesDefeated === characters.length){
 		gameOver("win!");
+	} else if (winner === hero){
+		// prepare for next round
+		opponent = false;
+		$("#opponent .charContainer").empty();
+		waitingForClick = true;
 	}
-	//$("#opponent .charContainer").empty();
 }
 
 function gameOver(result){
 	console.log("gameOver " + result);
+	waitingForClick = false;
+	$("#attack").off("click");
 }
 $("document").ready(gameInit);
