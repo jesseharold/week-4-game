@@ -5,7 +5,6 @@ To do:
      - style and theme
      - add character images
      - add battle sounds
-     - html notifications for win/lose
      - tweak characters' stats so that anyone can win
      - add more characters
 
