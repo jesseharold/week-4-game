@@ -69,9 +69,9 @@ function setOpponent(charId){
 		opponent = charId;
 		// stops player from clicking on more than one opponent
 		waitingForClick = false;
-		//console.log("opponent is " + opponent);
 		$("#enemies .character[data-char='" + charId + "']").detach().appendTo("#opponent .charContainer").off("click");
 		$("#attack").show();
+		showMessage("Click attack to begin the fight.");
 	}
 }
 
@@ -79,7 +79,8 @@ function doFight(){
 	if(opponent === false){
 		showMessage("You must choose a hero and an opponent.");
 	} else {
-		//console.log(hero + " and " + opponent + " fight!");
+		
+		showMessage(characters[hero].name + " and " + characters[opponent].name + "  clash swords!");
 		characters[hero].takeDamage(characters[opponent].attack());
 		characters[opponent].takeDamage(characters[hero].attack());
 		showStats();
