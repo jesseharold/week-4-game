@@ -44,6 +44,7 @@ footer {
     padding: 10px;
     box-sizing: border-box;
     font-size: larger;
+    background-color: white;
 }
 .character {
     margin: 10px auto;
@@ -70,4 +71,15 @@ footer {
 }
 #newGame {
 	display: none;
+}
+#message.winMsg {
+    background-color: green;
+    color: white;
+}
+#message.loseMsg {
+    background-color: red;
+    color: white;
+}
+#message.gameOverMsg {
+    background-color: black;
 }
