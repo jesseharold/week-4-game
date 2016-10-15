@@ -8,10 +8,11 @@ function Character(healthPoints, attackPower, counterAttackPower){
 
 	this.attack = function(){
 		var power = this.ap;
-		if (!this.enemy) {
-			this.ap += this.baseAp;
-		} else {
+		if (this.enemy) {
 			power = this.cap;
+		} else {
+			// hero's ap grows each turn
+			this.ap += this.baseAp;
 		}
 		return power;
 	}
@@ -55,6 +56,9 @@ function gameInit(){
 		}
 	});
 	showStats();
+	$("#newGame").on("click", function() {
+	    location.reload(false);
+	}).hide();
 	$("#attack").on("click", doFight);
 }
 
@@ -65,6 +69,7 @@ function setOpponent(charId){
 		waitingForClick = false;
 		//console.log("opponent is " + opponent);
 		$("#enemies .character[data-char='" + charId + "']").detach().appendTo("#opponent .charContainer").off("click");
+		$("#attack").show();
 	}
 }
 
@@ -76,6 +81,7 @@ function doFight(){
 		characters[hero].takeDamage(characters[opponent].attack());
 		characters[opponent].takeDamage(characters[hero].attack());
 		showStats();
+		//check to see if this fight is over
 		if(characters[hero].hp <= 0 && characters[opponent].hp <= 0){
 			fightOver("tie");
 		} else {
@@ -111,9 +117,10 @@ function fightOver(winner){
 	if (enemiesDefeated === characters.length){
 		gameOver("win!");
 	} else if (winner === hero){
-		// prepare for next round
+		// game not over, prepare for next round
 		opponent = false;
 		$("#opponent .charContainer").empty();
+		$("#attack").hide();
 		waitingForClick = true;
 	}
 }
@@ -121,6 +128,7 @@ function fightOver(winner){
 function gameOver(result){
 	console.log("gameOver " + result);
 	waitingForClick = false;
-	$("#attack").off("click");
+	$("#attack").hide();
+	$("#newGame").show();
 }
 $("document").ready(gameInit);
