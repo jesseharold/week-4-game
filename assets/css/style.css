@@ -5,6 +5,8 @@ body {
 }
 section {
     background-color: lavender;
+    margin: 10px;
+    border: 1px solid darkblue;
 	float: left;
 	text-align: center;
 }
@@ -30,7 +32,18 @@ footer {
 	height: 300px;
 }
 #controls {
-	width: 10%;
+    width: 13%;
+    position: absolute;
+    top: 100px;
+    left: 53%;
+    border: 0px;
+}
+#message {
+	width: 605px;
+	height: 140px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: larger;
 }
 .character {
     margin: 10px auto;
