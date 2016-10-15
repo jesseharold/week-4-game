@@ -47,10 +47,18 @@ footer {
     background-color: white;
 }
 .character {
+    position: relative;
+    overflow: hidden;
     margin: 10px auto;
     width: 150px;
-    height: 100px;
+    height: 210px;
     border: 1px solid black;
+    line-height: 20px;
+}
+#enemies .character .portrait {
+    position: relative;
+    left: -30px;
+    top: -15px;
 }
 #enemies .character {
     width: 75px;
