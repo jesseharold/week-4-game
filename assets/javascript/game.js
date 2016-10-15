@@ -1,8 +1,9 @@
 //character object constructor
-function Character(healthPoints, attackPower, counterAttackPower){
+function Character(healthPoints, attackPower, counterAttackPower, name){
 	this.hp = healthPoints;
 	this.ap = attackPower;
 	this.cap = counterAttackPower;
+	this.name = name;
 	this.baseAp = attackPower;
 	this.enemy;
 
@@ -34,13 +35,14 @@ var enemiesDefeated = 0;
 function gameInit(){
 	// instantiate the character objects
 	$(".charContainer .character").each(function(){
-		characters.push(new Character($(this).data("hp"),$(this).data("ap"),$(this).data("cap")));
+		var newChar = new Character($(this).data("hp"), $(this).data("ap"), $(this).data("cap"), $(this).text());
+		characters.push(newChar);
 	});
 	//console.log(characters);
 	$(".character").on("click", function(){
 		// make this char the hero
 		hero = $(this).data("char");
-		//console.log(hero + " is the hero");
+		showMessage("Now click to choose your first opponent. <br> Your attack gets stronger each time you use it. Choose the order of your opponents wisely.");
 		// reassign click events on others
 		$(".character").off("click").on("click", function(){
 			setOpponent($(this).data("char"));
@@ -75,7 +77,7 @@ function setOpponent(charId){
 
 function doFight(){
 	if(opponent === false){
-		showMessage("you must choose a hero and an opponent.");
+		showMessage("You must choose a hero and an opponent.");
 	} else {
 		//console.log(hero + " and " + opponent + " fight!");
 		characters[hero].takeDamage(characters[opponent].attack());
@@ -108,18 +110,18 @@ function showMessage(text, cssClass){
 function fightOver(winner){
 	showMessage(winner + " wins!");
 	if (winner === "tie") {
-		showMessage("You and "+opponent+" killed each other at the same time");
-		enemiesDefeated++;
+		showMessage("You and " + characters[opponent].name + " killed each other at the same time");
+		gameOver("lose.");
 	} else if (winner === hero) {
-		showMessage("You killed "+ opponent);
+		showMessage("You killed "+ characters[opponent].name);
 		enemiesDefeated++;
 	} else if (winner === opponent) {
-		showMessage(opponent + " killed you.");
+		showMessage(characters[opponent].name + " killed you.");
 		gameOver("lose.");
 	}
 	if (enemiesDefeated === characters.length-1){
 		gameOver("win!");
-	} else if (winner === hero || winner === "tie"){
+	} else if (winner === hero){
 		// game not over, prepare for next round
 		opponent = false;
 		$("#opponent .charContainer").empty();
@@ -129,7 +131,7 @@ function fightOver(winner){
 }
 
 function gameOver(result){
-	showMessage("gameOver " + result);
+	showMessage("Game Over: " + result);
 	waitingForClick = false;
 	$("#attack").hide();
 	$("#controls #newGame").show();
