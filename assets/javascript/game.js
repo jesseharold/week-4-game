@@ -75,7 +75,7 @@ function setOpponent(charId){
 
 function doFight(){
 	if(opponent === false){
-		console.log("you must choose a hero and an opponent.");
+		showMessage("you must choose a hero and an opponent.");
 	} else {
 		//console.log(hero + " and " + opponent + " fight!");
 		characters[hero].takeDamage(characters[opponent].attack());
@@ -102,21 +102,24 @@ function showStats(){
 		$(".character[data-char='" + i + "'] .stats").html(statsHtml);
 	}
 }
+function showMessage(text, cssClass){
+	$("#message").html(text).addClass(cssClass);
+}
 function fightOver(winner){
-	console.log(winner + " wins!");
+	showMessage(winner + " wins!");
 	if (winner === "tie") {
-		console.log("You and "+opponent+" killed each other at the same time");
+		showMessage("You and "+opponent+" killed each other at the same time");
 		enemiesDefeated++;
 	} else if (winner === hero) {
-		console.log("You killed "+ opponent);
+		showMessage("You killed "+ opponent);
 		enemiesDefeated++;
 	} else if (winner === opponent) {
-		console.log(opponent + " killed you.");
+		showMessage(opponent + " killed you.");
 		gameOver("lose.");
 	}
-	if (enemiesDefeated === characters.length){
+	if (enemiesDefeated === characters.length-1){
 		gameOver("win!");
-	} else if (winner === hero){
+	} else if (winner === hero || winner === "tie"){
 		// game not over, prepare for next round
 		opponent = false;
 		$("#opponent .charContainer").empty();
@@ -126,9 +129,9 @@ function fightOver(winner){
 }
 
 function gameOver(result){
-	console.log("gameOver " + result);
+	showMessage("gameOver " + result);
 	waitingForClick = false;
 	$("#attack").hide();
-	$("#newGame").show();
+	$("#controls #newGame").show();
 }
 $("document").ready(gameInit);
