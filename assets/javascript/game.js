@@ -25,6 +25,7 @@ function Character(healthPoints, attackPower, counterAttackPower, name){
 }
 
 //global variables
+var numOfEnemies = 6;
 var characters = [];
 var hero;
 var opponent;
@@ -33,11 +34,28 @@ var enemiesDefeated = 0;
 
 // game initialize
 function gameInit(){
-	// instantiate the character objects
-	$(".charContainer .character").each(function(){
-		var newChar = new Character($(this).data("hp"), $(this).data("ap"), $(this).data("cap"), $(this).text());
+	// create the html elements
+	for (var i = 0; i < numOfEnemies; i++) {
+		//pick a random character from the library
+		var random = Math.floor(Math.random()*charLibrary.length);
+		// instantiate the character object
+		var newChar = new Character(charLibrary[random].health, charLibrary[random].attack, charLibrary[random].counterAttack, charLibrary[random].name);
 		characters.push(newChar);
-	});
+		//generate new html element
+		var charEl = $("#enemies .character#blank").clone().prop("id", "char"+i)
+			.appendTo("#enemies .charContainer");
+		charEl.find(".name").text(newChar.name);
+		charEl.find(".portrait").html("<img src='"+charLibrary[random].image+"'' alt='"+newChar.name+"'>");
+		charEl.data({
+			char:i, 
+			ap: newChar.hp, 
+			hp: newChar.hp, 
+			cap: newChar.cap 
+		});
+	}
+	//remove blank character html
+	$("#enemies .character#blank").remove();
+
 	//console.log(characters);
 	$(".character").on("click", function(){
 		// make this char the hero
