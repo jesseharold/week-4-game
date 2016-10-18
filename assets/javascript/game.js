@@ -25,7 +25,7 @@ function Character(healthPoints, attackPower, counterAttackPower, name){
 }
 
 //global variables
-var numOfEnemies = 6;
+var numOfEnemies = 16;
 var characters = [];
 var hero;
 var opponent;
@@ -37,7 +37,7 @@ function gameInit(){
 	// create the html elements
 	for (var i = 0; i < numOfEnemies; i++) {
 		//pick a random character from the library
-		var random = Math.floor(Math.random()*charLibrary.length);
+		var random = getFromLibrary();
 		// instantiate the character object
 		var newChar = new Character(charLibrary[random].health, charLibrary[random].attack, charLibrary[random].counterAttack, charLibrary[random].name);
 		characters.push(newChar);
@@ -82,6 +82,17 @@ function gameInit(){
 	$("#attack").on("click", doFight);
 }
 
+function getFromLibrary(){
+	var index = Math.floor(Math.random()*charLibrary.length);
+	// check to see if this character is already in play
+	while (charLibrary[index].inPlay === true){
+		// try again
+		index = Math.floor(Math.random()*charLibrary.length);
+	}
+	charLibrary[index].inPlay = true;
+	return index
+}
+
 function setOpponent(charId){
 	if (waitingForClick){
 		opponent = charId;
@@ -119,7 +130,7 @@ function showStats(){
 		var statsHtml = "<div class='stat'>HP: " + characters[i].hp + "</div>";
 		statsHtml += "<div class='stat'>AP: " + characters[i].ap + "</div>";
 		statsHtml += "<div class='stat'>CAP: " + characters[i].cap + "</div>";
-		$(".character[data-char='" + i + "'] .stats").html(statsHtml);
+		$(".character#char" + i + " .stats").html(statsHtml);
 	}
 }
 function showMessage(text, clearPrev, cssClass){
