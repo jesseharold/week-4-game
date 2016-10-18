@@ -87,7 +87,7 @@ function setOpponent(charId){
 		opponent = charId;
 		// stops player from clicking on more than one opponent
 		waitingForClick = false;
-		$("#enemies .character[data-char='" + charId + "']").detach().appendTo("#opponent .charContainer").off("click");
+		$("#enemies #char"+charId).detach().appendTo("#opponent .charContainer").off("click");
 		$("#attack").show();
 		showMessage("Click attack to begin the fight.", true, false);
 	}
