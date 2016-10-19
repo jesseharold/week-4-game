@@ -25,7 +25,7 @@ function Character(healthPoints, attackPower, counterAttackPower, name){
 }
 
 //global variables
-var numOfEnemies = 16;
+var numOfEnemies = 10;
 var characters = [];
 var hero;
 var opponent;
