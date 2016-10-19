@@ -2,11 +2,26 @@ body {
 	padding: 30px;
     font-size: 18px;
     line-height: 30px;
+    background-color: black;
+    font-family: 'Bitter', 'Times New Roman', serif;
+}
+h1 {
+    color: red;
+    font-size: 68px;
+    margin-bottom: 10px;
+    font-family: 'Quintessential', cursive;
+}
+h2 {
+    color: #4a1717;
+    font-size: 31px;
+    margin: 10px;     
+    border-bottom: 1px solid;
+    padding-bottom: 1px;
 }
 section {
-    background-color: lavender;
+    background-color: rgb(162, 125, 12);;
     margin: 10px;
-    border: 1px solid darkblue;
+    border: 2px solid #4a1717;
 	float: left;
 	text-align: center;
 }
@@ -44,16 +59,21 @@ footer {
     padding: 10px;
     box-sizing: border-box;
     font-size: larger;
-    background-color: white;
+    background-color: #aaa;
+    color: #4a1717;
 }
 .character {
     position: relative;
     overflow: hidden;
     margin: 10px auto;
-    width: 150px;
-    height: 210px;
+    width: 130px;
+    padding: 4px;
     border: 1px solid black;
     line-height: 20px;
+    background-color: #d4cdb8;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: bold;
 }
 #enemies .character .portrait {
     position: relative;
@@ -61,7 +81,7 @@ footer {
     top: -24px;
 }
 #enemies .character {
-    width: 75px;
+    width: 68px;
     height: 50px;
     line-height: 20px;
     float: left;
@@ -72,6 +92,7 @@ footer {
 }
 .stat {
 	font-size: small;
+    font-weight: lighter;
     margin: 4px;
     padding: 0;
     line-height: 10px;
@@ -92,4 +113,76 @@ footer {
 }
 #message.gameOverMsg {
     background-color: black;
+}
+/* responsive styles! */
+@media screen and (max-width: 1015px) {
+    #enemies .character {
+        margin: 8px 32px;
+    }
+    #enemies h2 {
+        font-size: 24px;
+    }
+   #enemies {
+        height: auto;
+    }
+}
+@media screen and (max-width: 810px) {
+    #message {
+        width: 60%;
+    }
+    #hero, #opponent {
+        width: 180px;
+    }
+    #enemies h2 {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 645px) {
+    #enemies {
+        position: absolute;
+        top: 550px;
+        width: 100%;
+    }
+    #enemies h2 {
+        font-size: 32px;
+    }
+    #controls {
+        left: 41%;
+    }    
+    #message {
+        width: 100%;
+    }
+    footer {
+        position: relative;
+        top: -40px;
+        color: #666;
+    }
+}
+@media screen and (max-width: 505px) {
+    h1 {
+        font-size: 50px;
+    }
+    section, #opponent, #hero {
+        float: inherit;
+    } 
+    #enemies {
+        top: 840px;
+    }
+    footer {
+        font-size: small;
+    }
+
+}
+@media screen and (max-width: 395px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 300px) {
+    #enemies {
+        width: 200px;
+    }
+    #enemies h2 {
+        font-size: 24px;
+    }
 }
