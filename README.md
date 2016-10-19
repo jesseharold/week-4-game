@@ -2,8 +2,7 @@
 Game of Thrones RPG game written with CSS, JavaScript, and jQuery
 
 To do: 
-     - colors, design images, fonts
-     - add battle sounds, bg music
+     - add battle sounds, kill / die sounds
 
 Instructions (all done):
 
