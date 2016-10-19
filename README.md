@@ -1,6 +1,16 @@
 # week-4-game
 Game of Thrones RPG game written with CSS, JavaScript, and jQuery
 
+play the game here:
+http://shrouded-depths-51569.herokuapp.com/
+
+added features:
+ - external character library
+ - game chooses a random hand of characers to start the game
+ - responsive css
+ - sound effects and fonts
+ - used a constructor function 
+
 Instructions (all done):
 
     Watch the demo: https://uclax.bootcampcontent.com/UCLA-Coding-Boot-Camp/09-16-Class-Content/blob/master/0919-MW/04-jquery-rpg/2-Homework/Instructions/homework_demos/starwars_demo.mp4
