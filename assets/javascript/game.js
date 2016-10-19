@@ -151,12 +151,12 @@ function showStats(){
 function showMessage(text, clearPrev, cssClass){
 	// prints out the the #message html element
 	if(clearPrev) {
-		$("#message").empty();
+		$("#message .msgText").empty();
 	}
 	if (cssClass === false){
-		$("#message").append(text).removeClass();
+		$("#message").removeClass().find(".msgText").append(text);
 	} else {
-		$("#message").append(text).addClass(cssClass);
+		$("#message").addClass(cssClass).find(".msgText").append(text);
 	}
 }
 function fightOver(winner){

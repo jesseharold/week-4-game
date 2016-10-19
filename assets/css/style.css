@@ -22,11 +22,21 @@ h2 {
     padding-bottom: 1px;
 }
 section {
-    background-color: rgb(162, 125, 12);;
     margin: 10px;
     border: 2px solid #4a1717;
 	float: left;
 	text-align: center;
+    position: relative;
+}
+.sectionBG {
+    background-color: rgb(162, 125, 12);
+    opacity: 0.6;    
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: -10;
 }
 footer {
     font-size: 0.65em;
@@ -71,6 +81,7 @@ footer {
     top: 100px;
     left: 51%;
     border: 0px;
+    z-index: 30;
 }
 #message {
 	width: 74%;
@@ -79,27 +90,36 @@ footer {
     position: relative;
     box-sizing: border-box;
     font-size: larger;
-    background-color: #aaa;
     color: #4a1717;
 }
-#message.winMsg {
+#message .sectionBG {
+    background-color: #aaa;
+    opacity: 0.9;
+}
+#message.winMsg .sectionBG {
     background-color: green;
     color: white;
 }
-#message.loseMsg {
+#message.loseMsg .sectionBG {
     background-color: red;
     color: white;
 }
-#message.loseGameMsg {
+#message.loseGameMsg .sectionBG {
     background-color: black;
     background-image: url("../images/you-die.jpg");
     background-position: 110px -110px;
+}
+#message.loseGameMsg {
+    color: white;
     text-shadow: black -1px 3px 4px;
 }
-#message.winGameMsg {
+#message.winGameMsg .sectionBG {
     background-color: white;
     background-image: url("../images/cheer.jpg");
     background-position: 0px -50px;
+}
+#message.winGameMsg {
+    color: white;
     text-shadow: black -1px 3px 4px;
 }
 .character {
