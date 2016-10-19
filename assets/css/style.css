@@ -122,15 +122,18 @@ footer {
     padding: 0;
     line-height: 10px;
 }
-#attack {
-	display: none;
-    font-size: 24px;
-    color: white;
+button {
     cursor: pointer;
     z-index: 15;
+    font-size: 24px;
+}
+#attack {
+	display: none;
+    color: white;
 }
 #newGame {
 	display: none;
+    padding: 10px;
 }
 
 /* got this css from cssarrowplease.com by Simon Højberg*/
