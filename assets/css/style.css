@@ -65,6 +65,7 @@ footer {
 }
 #controls {
     width: 13%;
+    background-color: transparent;
     position: absolute;
     top: 100px;
     left: 51%;
@@ -113,9 +114,43 @@ footer {
 }
 #attack {
 	display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 15;
 }
 #newGame {
 	display: none;
+}
+
+/* got this css from cssarrowplease.com by Simon Højberg*/
+.arrow_box {
+    position: relative;
+    background: #960202;
+    border: 4px solid #fff;
+}
+.arrow_box:after, .arrow_box:before {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.arrow_box:after {
+    border-color: rgba(150, 2, 2, 0);
+    border-left-color: #960202;
+    border-width: 30px;
+    margin-top: -30px;
+}
+.arrow_box:before {
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 36px;
+    margin-top: -36px;
 }
 /* responsive styles! */
 @media screen and (max-width: 1015px) {
@@ -165,7 +200,7 @@ footer {
         float: inherit;
     } 
     #enemies {
-        top: 870px;
+        top: 910px;
     }
     footer {
         font-size: 12px;
@@ -175,7 +210,6 @@ footer {
         padding: 10px;
         clear: both;
         width: 160px;
-        background-color: red;
     }
     #message {
         font-size: 16px;

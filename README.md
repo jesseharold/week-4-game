@@ -2,9 +2,7 @@
 Game of Thrones RPG game written with CSS, JavaScript, and jQuery
 
 To do: 
-     - add battle sounds, kill / die sounds
      - improve gameplay by messing with numbers
-     - make number of enemies set-able?
 
 Instructions (all done):
 
