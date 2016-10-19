@@ -1,9 +1,6 @@
 # week-4-game
 Game of Thrones RPG game written with CSS, JavaScript, and jQuery
 
-To do: 
-     - improve gameplay by messing with numbers
-
 Instructions (all done):
 
     Watch the demo: https://uclax.bootcampcontent.com/UCLA-Coding-Boot-Camp/09-16-Class-Content/blob/master/0919-MW/04-jquery-rpg/2-Homework/Instructions/homework_demos/starwars_demo.mp4
