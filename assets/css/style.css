@@ -170,6 +170,17 @@ footer {
     }
     footer {
         font-size: small;
+        top: -51px;
+    }
+    #controls {
+        position: static;
+        padding: 10px;
+        clear: both;
+        width: 160px;
+        background-color: red;
+    }
+    #message {
+        font-size: 16px;
     }
 
 }
