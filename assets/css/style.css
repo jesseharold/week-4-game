@@ -43,6 +43,7 @@ footer {
     position: relative;
     left: -30px;
     top: -24px;
+    min-height: 350px;
 }
 #enemies .character {
     width: 68px;
@@ -89,8 +90,17 @@ footer {
     background-color: red;
     color: white;
 }
-#message.gameOverMsg {
+#message.loseGameMsg {
     background-color: black;
+    background-image: url("../images/you-die.jpg");
+    background-position: 110px -110px;
+    text-shadow: black -1px 3px 4px;
+}
+#message.winGameMsg {
+    background-color: white;
+    background-image: url("../images/cheer.jpg");
+    background-position: 0px -50px;
+    text-shadow: black -1px 3px 4px;
 }
 .character {
     position: relative;

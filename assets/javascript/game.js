@@ -162,7 +162,7 @@ function showMessage(text, clearPrev, cssClass){
 function fightOver(winner){
 	showMessage(winner + " wins!", true);
 	if (winner === "tie") {
-		showMessage("You and " + characters[opponent].name + " killed each other at the same time", true, "loseMsg");
+		showMessage("You and " + characters[opponent].name + " killed each other at the same time.", true, "loseMsg");
 		gameOver("lose");
 		sounds[3].play();
 		sounds[4].play();
@@ -189,7 +189,8 @@ function fightOver(winner){
 	}
 }
 function gameOver(result){
-	showMessage("<br>Game Over: " + result, false, result+"Msg gameOverMsg");
+	var msgClass = result + "GameMsg";
+	showMessage("<br>Game Over: You " + result + "!", false, msgClass);
 	waitingForClick = false;
 	$("#attack").hide();
 	$("#controls #newGame").show();
