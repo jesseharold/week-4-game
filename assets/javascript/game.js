@@ -31,17 +31,20 @@ var hero;
 var opponent;
 var waitingForClick = true;
 var enemiesDefeated = 0;
+var sounds = [];
+
+// *** Functions *** //
 
 // game initialize
 function gameInit(){
 	// create the html elements
 	for (var i = 0; i < numOfEnemies; i++) {
-		//pick a random character from the library
+		// pick a random character from the library
 		var random = getFromLibrary();
 		// instantiate the character object
 		var newChar = new Character(charLibrary[random].health, charLibrary[random].attack, charLibrary[random].counterAttack, charLibrary[random].name);
 		characters.push(newChar);
-		//generate new html element
+		// generate new html element
 		var charEl = $("#enemies .character#blank").clone().prop("id", "char"+i)
 			.appendTo("#enemies .charContainer");
 		charEl.find(".name").text(newChar.name);
@@ -53,18 +56,19 @@ function gameInit(){
 			cap: newChar.cap 
 		});
 	}
-	//remove blank character html
+	// remove blank character html
 	$("#enemies .character#blank").remove();
 
-	//console.log(characters);
+	// set click events
 	$(".character").on("click", function(){
 		// make this char the hero
 		hero = $(this).data("char");
 		showMessage("Now click to choose your first opponent. <br> Your attack gets stronger each time you use it. Choose the order of your opponents wisely.", true);
-		// reassign click events on others
+		// reassign click events on non-hero characters
 		$(".character").off("click").on("click", function(){
 			setOpponent($(this).data("char"));
 		});
+		// set the enemy boolean on character objects
 		for (var i = 0; i < characters.length; i++) {
 			if (i === hero){
 				characters[i].enemy = false;
@@ -75,14 +79,23 @@ function gameInit(){
 			}
 		}
 	});
-	showStats();
 	$("#newGame").on("click", function() {
 	    location.reload(false);
 	}).hide();
 	$("#attack").on("click", doFight);
+
+	showStats();
+
+	// set up sound effects
+	sounds[0] = new Audio("assets/sounds/swords-clashing.wav");
+	sounds[1] = new Audio("assets/sounds/happy-trumpet.wav");
+	sounds[2] = new Audio("assets/sounds/crowd-cheer.wav");
+	sounds[3] = new Audio("assets/sounds/groan-of-pain.wav");
+	sounds[4] = new Audio("assets/sounds/sad-trombone.wav");
 }
 
 function getFromLibrary(){
+	// returns the index of a random character from the library
 	var index = Math.floor(Math.random()*charLibrary.length);
 	// check to see if this character is already in play
 	while (charLibrary[index].inPlay === true){
@@ -109,6 +122,7 @@ function doFight(){
 		showMessage("You must choose a hero and an opponent.", false);
 	} else {
 		showMessage(characters[hero].name + " and " + characters[opponent].name + "  clash swords!", true);
+		sounds[0].play();
 		characters[hero].takeDamage(characters[opponent].attack());
 		characters[opponent].takeDamage(characters[hero].attack());
 		showStats();
@@ -126,6 +140,7 @@ function doFight(){
 	}
 }
 function showStats(){
+	// prints out stats for all characters
 	for (var i = 0; i < characters.length; i++) {
 		var statsHtml = "<div class='stat'>HP: " + characters[i].hp + "</div>";
 		statsHtml += "<div class='stat'>AP: " + characters[i].ap + "</div>";
@@ -134,6 +149,7 @@ function showStats(){
 	}
 }
 function showMessage(text, clearPrev, cssClass){
+	// prints out the the #message html element
 	if(clearPrev) {
 		$("#message").empty();
 	}
@@ -148,15 +164,21 @@ function fightOver(winner){
 	if (winner === "tie") {
 		showMessage("You and " + characters[opponent].name + " killed each other at the same time", true, "loseMsg");
 		gameOver("lose");
+		sounds[3].play();
+		sounds[4].play();
 	} else if (winner === hero) {
 		showMessage("You killed "+ characters[opponent].name, true, "winMsg");
 		enemiesDefeated++;
+		sounds[1].play();
 	} else if (winner === opponent) {
 		showMessage(characters[opponent].name + " killed you.", true, "loseMsg");
 		gameOver("lose");
+		sounds[3].play();
+		sounds[4].play();
 	}
 	if (enemiesDefeated === characters.length-1){
 		gameOver("win");
+		sounds[2].play();
 	} else if (winner === hero){
 		// game not over, prepare for next round
 		showMessage("<br>Choose another opponent.", false);
